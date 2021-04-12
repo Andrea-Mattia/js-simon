@@ -48,6 +48,11 @@ $(document).ready(function() {
                 // Inserimento dei numeri da parte dell'utente
                 for (var i = 1; i <= 5; i++) {
                     var num = parseInt( prompt('Inserisci il numero ' + i + ' di 5') );
+
+                    // Validazione numeri inseriti
+                    while (userNumbers.includes(num) || ((num < 1) || (num > 100)) || (isNaN(num))) {
+                        num = parseInt( prompt('Inserire numero univoco o compreso tra 1 e 100') );
+                    }
                 
                     // Inserisco i numeri inseriti nell'array
                     userNumbers.push(num);
