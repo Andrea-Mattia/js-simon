@@ -11,11 +11,14 @@ $(document).ready(function() {
     // References
     var numbers = [];
     var userNumbers = [];
+    var equalNumbers = [];
+    
 
     // Inclusione numeri random nell'array numbers
-    for (var i = 0; i < 5; i++) {
+    for (var i = numbers.length; i < 5; i++) {
         var randomNum = getRandomNumber(1, 100);
-        // Validazione
+
+        // Validazione e inclusione
         if (! numbers.includes(randomNum)) {
             numbers.push(randomNum);
         }
@@ -27,7 +30,7 @@ $(document).ready(function() {
     // Countdown di 30s
 
     // setup
-    var seconds = 30;
+    var seconds = 3;
 
     var countdown = setInterval(function() {
         if (seconds === 0) {
@@ -41,18 +44,48 @@ $(document).ready(function() {
                 
                 // Inserisco i numeri inseriti nell'array
                 userNumbers.push(num);
+
+                if (numbers.includes(num)) {
+                    equalNumbers.push(num);
+                }
             }
 
             // Stampo i numeri inseriti dall'utente
-            console.log(userNumbers);
+            console.log('I numeri inseriti dall\'utente sono: ', userNumbers);
+
+            // Stampo i numeri uguali
+            console.log('I numeri uguali sono: ', equalNumbers);
+
+            // Esito dell'inserimento
+            switch (equalNumbers.length) {
+                case 1:
+                    console.log('Complimenti, hai azzeccato un numero, ed è: ' + equalNumbers);
+                    break;
+                case 2:
+                    console.log('Complimenti, hai azzeccato due numeri, e sono: ' + equalNumbers);
+                    break;
+                case 3:
+                    console.log('Complimenti, hai azzeccato tre numeri, e sono: ' + equalNumbers);
+                    break;
+                case 4:
+                    console.log('Complimenti, hai azzeccato quattro numeri, e sono: ' + equalNumbers);
+                    break;
+                case 5:
+                    console.log('Complimenti, hai azzeccato tutti numeri!!! I numeri sono: ' + equalNumbers);
+                    break;
+                default:
+                    console.log('Aaaw, non hai inserito nessun numero uguale :(');
+            }
+
         } else {
             // Stampo i secondi del countdown e decremento i secondi
             console.log(seconds);
             seconds--;
         }
+
+
     }, 1000)
 
-    
 
     // End doc ready
 });
