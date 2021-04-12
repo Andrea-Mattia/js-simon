@@ -10,6 +10,7 @@ $(document).ready(function() {
 
     // References
     var numbers = [];
+    var userNumbers = [];
 
     // Inclusione numeri random nell'array numbers
     for (var i = 0; i < 5; i++) {
@@ -22,6 +23,36 @@ $(document).ready(function() {
 
     // Mostro i numeri generati casualmente con un alert()
     alert('Questi sono i numeri generati casualmente: ' + numbers);
+
+    // Countdown di 30s
+
+    // setup
+    var seconds = 30;
+
+    var countdown = setInterval(function() {
+        if (seconds === 0) {
+
+            // Interrompo il countdown
+            clearInterval(countdown);
+
+            // Inserimento dei numeri da parte dell'utente
+            for (var i = 1; i <= 5; i++) {
+                var num = parseInt( prompt('Inserisci il numero ' + i + ' di 5') );
+                
+                // Inserisco i numeri inseriti nell'array
+                userNumbers.push(num);
+            }
+
+            // Stampo i numeri inseriti dall'utente
+            console.log(userNumbers);
+        } else {
+            // Stampo i secondi del countdown e decremento i secondi
+            console.log(seconds);
+            seconds--;
+        }
+    }, 1000)
+
+    
 
     // End doc ready
 });
