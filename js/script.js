@@ -12,79 +12,89 @@ $(document).ready(function() {
     var numbers = [];
     var userNumbers = [];
     var equalNumbers = [];
-    
 
-    // Inclusione numeri random nell'array numbers
-    for (var i = numbers.length; i < 5; i++) {
-        var randomNum = getRandomNumber(1, 100);
+    // Setup  
+    var count = $('.countdown');
+    var userNum = $('.user-num');
+    var eqNum = $('.equal-num');
+    var res = $('.result');
+    var btn = $('.btn');
 
-        // Validazione e inclusione
-        if (! numbers.includes(randomNum)) {
-            numbers.push(randomNum);
+    btn.click(function() {
+        // Inclusione numeri random nell'array numbers
+        for (var i = numbers.length; i < 5; i++) {
+            var randomNum = getRandomNumber(1, 100);
+
+            // Validazione e inclusione
+            if (! numbers.includes(randomNum)) {
+                numbers.push(randomNum);
+            }
         }
-    }
 
-    // Mostro i numeri generati casualmente con un alert()
-    alert('Questi sono i numeri generati casualmente: ' + numbers);
+        // Mostro i numeri generati casualmente con un alert()
+        alert('Questi sono i numeri generati casualmente: ' + numbers);
 
-    // Countdown di 30s
+        // Countdown di 30s
 
-    // setup
-    var seconds = 3;
+        // setup
+        var seconds = 30;
 
-    var countdown = setInterval(function() {
-        if (seconds === 0) {
+        var countdown = setInterval(function() {
+            if (seconds === 0) {
 
-            // Interrompo il countdown
-            clearInterval(countdown);
+                // Interrompo il countdown
+                clearInterval(countdown);
 
-            // Inserimento dei numeri da parte dell'utente
-            for (var i = 1; i <= 5; i++) {
-                var num = parseInt( prompt('Inserisci il numero ' + i + ' di 5') );
+                // Inserimento dei numeri da parte dell'utente
+                for (var i = 1; i <= 5; i++) {
+                    var num = parseInt( prompt('Inserisci il numero ' + i + ' di 5') );
                 
-                // Inserisco i numeri inseriti nell'array
-                userNumbers.push(num);
+                    // Inserisco i numeri inseriti nell'array
+                    userNumbers.push(num);
 
-                if (numbers.includes(num)) {
-                    equalNumbers.push(num);
+                    // Se numbers include il numero inserito dall'utente lo aggiungo all'array dei numeri uguali
+                    if (numbers.includes(num)) {
+                        equalNumbers.push(num);
+                    }
                 }
+
+                // Stampo i numeri inseriti dall'utente
+                userNum.text('I numeri inseriti dall\'utente sono: ' + userNumbers);
+
+                // Stampo i numeri uguali
+                eqNum.text('I numeri uguali sono: ' + equalNumbers.length);
+
+                // Esito dell'inserimento
+                switch (equalNumbers.length) {
+                    case 1:
+                        res.text('Complimenti, hai azzeccato un numero, ed è: ' + equalNumbers);
+                        break;
+                    case 2:
+                        res.text('Complimenti, hai azzeccato due numeri, e sono: ' + equalNumbers);
+                        break;
+                    case 3:
+                        res.text('Complimenti, hai azzeccato tre numeri, e sono: ' + equalNumbers);
+                        break;
+                    case 4:
+                        res.text('Complimenti, hai azzeccato quattro numeri, e sono: ' + equalNumbers);
+                        break;
+                    case 5:
+                        res.text('Complimenti, hai azzeccato tutti numeri!!! I numeri sono: ' + equalNumbers);
+                        break;
+                    default:
+                        res.text('Aaaw, non hai inserito nessun numero uguale :(');
+                }
+
+            } else {
+                // Stampo i secondi del countdown e decremento i secondi
+                count.text(seconds);
+                btn.text('Countdown...')
+                seconds--;
             }
 
-            // Stampo i numeri inseriti dall'utente
-            console.log('I numeri inseriti dall\'utente sono: ', userNumbers);
+        }, 1000);
 
-            // Stampo i numeri uguali
-            console.log('I numeri uguali sono: ', equalNumbers);
-
-            // Esito dell'inserimento
-            switch (equalNumbers.length) {
-                case 1:
-                    console.log('Complimenti, hai azzeccato un numero, ed è: ' + equalNumbers);
-                    break;
-                case 2:
-                    console.log('Complimenti, hai azzeccato due numeri, e sono: ' + equalNumbers);
-                    break;
-                case 3:
-                    console.log('Complimenti, hai azzeccato tre numeri, e sono: ' + equalNumbers);
-                    break;
-                case 4:
-                    console.log('Complimenti, hai azzeccato quattro numeri, e sono: ' + equalNumbers);
-                    break;
-                case 5:
-                    console.log('Complimenti, hai azzeccato tutti numeri!!! I numeri sono: ' + equalNumbers);
-                    break;
-                default:
-                    console.log('Aaaw, non hai inserito nessun numero uguale :(');
-            }
-
-        } else {
-            // Stampo i secondi del countdown e decremento i secondi
-            console.log(seconds);
-            seconds--;
-        }
-
-
-    }, 1000)
+    });
 
 
     // End doc ready
